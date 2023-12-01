@@ -7,14 +7,11 @@ const sumOfValues = (input) => {
 
   for (let i of input) {
     const digitsArr = i.match(/\d/g);
-    console.log(digitsArr);
 
     if (digitsArr && digitsArr.length >= 1) {
       const digits = digitsArr.map((digit) => parseInt(digit));
       const digit1 = digits[0];
-      console.log("first digit", digit1);
       const digit2 = digits.length === 1 ? digit1 : digits[digits.length - 1];
-      console.log("last digit", digit2);
 
       const lineValue = digit1 * 10 + digit2;
 
