@@ -26,14 +26,14 @@ const isPossible = (inputArr) => {
     subset.forEach((group) => {
       const colors = group.split(", ");
       colors.forEach((color) => {
-        const [number, colorName] = color.split(" ");
+        const [colorCount, colorName] = color.split(" ");
 
         if (colorName === "red") {
-          redCubes = Math.max(redCubes, parseInt(number));
+          redCubes = Math.max(redCubes, parseInt(colorCount));
         } else if (colorName === "green") {
-          greenCubes = Math.max(greenCubes, parseInt(number));
+          greenCubes = Math.max(greenCubes, parseInt(colorCount));
         } else if (colorName === "blue") {
-          blueCubes = Math.max(blueCubes, parseInt(number));
+          blueCubes = Math.max(blueCubes, parseInt(colorCount));
         }
       });
     });
@@ -58,12 +58,56 @@ const isPossible = (inputArr) => {
   });
 };
 
+const minCubes = (inputArr) => {
+  let sum = 0;
+
+  inputArr.forEach((input) => {
+    let [gString, subsetStr] = input.split(": ");
+    const [gameName, currentGameId] = gString.split(" ");
+    const gameID = parseInt(currentGameId);
+
+    const subset = subsetStr.split("; ");
+
+    const counts = {
+      red: [],
+      green: [],
+      blue: [],
+    };
+
+    subset.forEach((group) => {
+      const colors = group.split(", ");
+
+      colors.forEach((color) => {
+        const [colorCount, colorName] = color.split(" ");
+        counts[colorName].push(parseInt(colorCount));
+      });
+    });
+
+    let redMax = Math.max(...counts.red);
+    let greenMax = Math.max(...counts.green);
+    let blueMax = Math.max(...counts.blue);
+
+    console.log(
+      "redMax: " + redMax,
+      "greenMax: " + greenMax,
+      "blueMax: " + blueMax
+    );
+
+    const power = redMax * greenMax * blueMax;
+
+    sum += power;
+    console.log(sum);
+  });
+};
+
 fs.readFile(inputArr, "utf-8", (err, data) => {
   if (data) {
     const input = data.split("\n");
-    isPossible(input);
+    minCubes(input);
   } else {
     console.log("Error reading data", err);
     return;
   }
 });
+
+// isPossible(inputArr);
