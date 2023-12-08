@@ -73,11 +73,11 @@ const totalScratchCards = (cards) => {
       const currentCardCopies = cardCopyTracker[cardIndex];
 
       // get the indexes of the cards for which we need to increase the count
-      const startIdx = cardIndex + 1;
-      const endIdx = Math.min(cards.length - 1, cardIndex + matches);
+      const startIndex = cardIndex + 1;
+      const endIndex = Math.min(cards.length - 1, cardIndex + matches);
 
       // add the copy counts
-      for (let i = startIdx; i <= endIdx; i++) {
+      for (let i = startIndex; i <= endIndex; i++) {
         cardCopyTracker[i] += currentCardCopies;
       }
 
